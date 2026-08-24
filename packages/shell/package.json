@@ -1,0 +1,8 @@
+{
+  "name": "@game/shell",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "La carcasa: pantallas, progresion, pistas, comercio, persistencia y telemetria."
+}

@@ -1,0 +1,49 @@
+{
+  "id": "c1-008",
+  "case": 1,
+  "title": "Caso cerrado",
+  "place": "Azotea · el pastel, por fin",
+  "grid": [
+    "#########",
+    "#.*.....#",
+    "#..#.O#.#",
+    "#*#E....#",
+    "#...*#..#",
+    "#.#..#..#",
+    "#..#...##",
+    "#O..*...#",
+    "#########"
+  ],
+  "playerStart": [
+    2,
+    7
+  ],
+  "shadowStart": [
+    7,
+    2
+  ],
+  "doors": [],
+  "plates": [],
+  "hintText": "Cuatro pistas y una sola yo. Primero úsame de pared todo lo que puedas; hundirme es lo último que harás conmigo.",
+  "optimalMoves": 16,
+  "solutionPath": [
+    "D",
+    "L",
+    "U",
+    "L",
+    "D",
+    "R",
+    "U",
+    "D",
+    "L",
+    "L",
+    "U",
+    "R",
+    "D",
+    "L",
+    "U",
+    "L"
+  ],
+  "solutionCount": 1,
+  "rulesHash": "rulebook-2.7:4956b884a538dd79"
+}

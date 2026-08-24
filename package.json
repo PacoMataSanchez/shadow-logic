@@ -1,0 +1,28 @@
+{
+  "name": "plataforma",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Carcasa reutilizable de juegos móviles por niveles · Aplicación Maestra v0.3",
+  "workspaces": [
+    "packages/*",
+    "games/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.dom.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build:proto": "node apps/prototype/build.mjs",
+    "batch": "tsx games/shadow-logic/tools/batch-cli.ts",
+    "solve": "tsx games/shadow-logic/tools/solve-cli.ts",
+    "generate": "tsx games/shadow-logic/tools/build-case01.ts",
+    "check": "npm run typecheck && npm run test && npm run batch"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  }
+}

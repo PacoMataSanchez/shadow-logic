@@ -1,0 +1,37 @@
+{
+  "id": "c1-001",
+  "case": 1,
+  "title": "Primer día",
+  "place": "Despacho · lunes por la mañana",
+  "grid": [
+    "#######",
+    "#.....#",
+    "#..#..#",
+    "#.....#",
+    "#.E#.*#",
+    "#.....#",
+    "#######"
+  ],
+  "playerStart": [
+    4,
+    4
+  ],
+  "shadowStart": [
+    5,
+    1
+  ],
+  "doors": [],
+  "plates": [],
+  "tutorial": true,
+  "hintText": "No frenas cuando quieres, frenas cuando chocas. Asúmelo y vamos.",
+  "optimalMoves": 5,
+  "solutionPath": [
+    "R",
+    "U",
+    "L",
+    "D",
+    "R"
+  ],
+  "solutionCount": 1,
+  "rulesHash": "rulebook-2.7:4956b884a538dd79"
+}

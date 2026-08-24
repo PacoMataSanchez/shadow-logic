@@ -1,0 +1,8 @@
+{
+  "name": "@game/shadow-logic",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "description": "Shadow Logic: motor, adaptador, contenido y autoria."
+}

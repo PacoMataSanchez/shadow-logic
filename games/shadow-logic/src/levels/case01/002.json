@@ -1,0 +1,39 @@
+{
+  "id": "c1-002",
+  "case": 1,
+  "title": "Estoy aquí",
+  "place": "Despacho · lunes por la mañana",
+  "grid": [
+    "#######",
+    "#.....#",
+    "#.*#..#",
+    "#.....#",
+    "#.E#.*#",
+    "#.....#",
+    "#######"
+  ],
+  "playerStart": [
+    4,
+    4
+  ],
+  "shadowStart": [
+    5,
+    1
+  ],
+  "doors": [],
+  "plates": [],
+  "tutorial": true,
+  "hintText": "Yo también paro las cosas. Sobre todo a ti. Úsame de pared.",
+  "optimalMoves": 7,
+  "solutionPath": [
+    "R",
+    "D",
+    "L",
+    "U",
+    "L",
+    "D",
+    "R"
+  ],
+  "solutionCount": 1,
+  "rulesHash": "rulebook-2.7:4956b884a538dd79"
+}

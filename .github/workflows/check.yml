@@ -1,0 +1,28 @@
+# El guardián del repositorio.
+#
+# `batch` no es un extra: revalida los 8 niveles con el motor actual y comprueba
+# que el `rulesHash` no se ha movido. Si alguien toca una regla sin regenerar el
+# catálogo, esto se pone rojo antes de llegar a main.
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Typecheck (base + capa DOM)
+        run: npm run typecheck
+      - name: Pruebas
+        run: npm test
+      - name: Revalidar el catálogo de niveles
+        run: npm run batch

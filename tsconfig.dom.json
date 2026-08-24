@@ -1,0 +1,14 @@
+{
+  // Capa de presentación: es la ÚNICA que puede ver el DOM.
+  //
+  // El proyecto base (tsconfig.json) no incluye `lib: dom` a propósito: así el
+  // motor, el contrato, el kit y las herramientas no pueden tocar el navegador
+  // ni por accidente. La regla de dependencias deja de ser una promesa y pasa a
+  // ser un error de compilación.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": []
+  },
+  "include": ["games/*/render", "apps"]
+}

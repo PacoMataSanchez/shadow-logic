@@ -1,0 +1,67 @@
+{
+  "id": "c1-006",
+  "case": 1,
+  "title": "El tendedero",
+  "place": "Patio de vecinos · el tendedero",
+  "grid": [
+    "#########",
+    "#......_#",
+    "#.#...#.#",
+    "#..*.#..#",
+    "####+####",
+    "#.*#..*.#",
+    "#.#...#.#",
+    "#E......#",
+    "#########"
+  ],
+  "playerStart": [
+    1,
+    3
+  ],
+  "shadowStart": [
+    1,
+    6
+  ],
+  "doors": [
+    {
+      "id": "d1",
+      "pos": [
+        4,
+        4
+      ],
+      "controlledBy": [
+        "p1"
+      ],
+      "logic": "OR"
+    }
+  ],
+  "plates": [
+    {
+      "id": "p1",
+      "pos": [
+        1,
+        7
+      ]
+    }
+  ],
+  "hintText": "Primero abre, después recoge. Al revés te toca volver, y vuelvo yo contigo.",
+  "optimalMoves": 14,
+  "solutionPath": [
+    "R",
+    "L",
+    "D",
+    "R",
+    "D",
+    "R",
+    "U",
+    "L",
+    "D",
+    "L",
+    "U",
+    "R",
+    "L",
+    "D"
+  ],
+  "solutionCount": 1,
+  "rulesHash": "rulebook-2.7:4956b884a538dd79"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "c1-003",
+  "case": 1,
+  "title": "Perdona",
+  "place": "Despacho · la sala de archivadores",
+  "grid": [
+    "########",
+    "#......#",
+    "#.##..*#",
+    "#E...#.#",
+    "#.#..*.#",
+    "#...##.#",
+    "#......#",
+    "########"
+  ],
+  "playerStart": [
+    4,
+    1
+  ],
+  "shadowStart": [
+    6,
+    1
+  ],
+  "doors": [],
+  "plates": [],
+  "hintText": "Si vienes hacia mí me empujas. Enhorabuena, ya sabes moverme.",
+  "optimalMoves": 12,
+  "solutionPath": [
+    "D",
+    "R",
+    "U",
+    "R",
+    "D",
+    "R",
+    "U",
+    "L",
+    "D",
+    "R",
+    "U",
+    "L"
+  ],
+  "solutionCount": 1,
+  "rulesHash": "rulebook-2.7:4956b884a538dd79"
+}

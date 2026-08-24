@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@game/core": ["packages/core/src/index.ts"],
+      "@game/core/*": ["packages/core/src/*"],
+      "@game/shell": ["packages/shell/src/index.ts"],
+      "@game/shell/*": ["packages/shell/src/*"],
+      "@puzzle/kit": ["packages/puzzle-kit/src/index.ts"],
+      "@puzzle/kit/*": ["packages/puzzle-kit/src/*"],
+      "@puzzle/authoring": ["packages/authoring/src/index.ts"],
+      "@puzzle/authoring/*": ["packages/authoring/src/*"],
+      "@game/shadow-logic": ["games/shadow-logic/src/index.ts"],
+      "@game/shadow-logic/*": ["games/shadow-logic/*"]
+    }
+  },
+  "include": ["packages", "games/*/src", "games/*/tools", "games/*/tests"]
+}

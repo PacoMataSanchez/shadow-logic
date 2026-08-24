@@ -1,0 +1,46 @@
+{
+  "id": "c1-007",
+  "case": 1,
+  "title": "El puente",
+  "place": "Sótano · el suelo que cede",
+  "grid": [
+    "########",
+    "#...*..#",
+    "#O.#...#",
+    "#....O.#",
+    "#*..#..#",
+    "#.....E#",
+    "#..#...#",
+    "########"
+  ],
+  "playerStart": [
+    4,
+    6
+  ],
+  "shadowStart": [
+    5,
+    3
+  ],
+  "doors": [],
+  "plates": [],
+  "hintText": "Sí, puedo taparte el agujero. Una vez. Y ya no vuelvo. Piénsalo bien.",
+  "optimalMoves": 14,
+  "solutionPath": [
+    "D",
+    "L",
+    "U",
+    "L",
+    "L",
+    "D",
+    "L",
+    "U",
+    "U",
+    "R",
+    "D",
+    "L",
+    "U",
+    "R"
+  ],
+  "solutionCount": 1,
+  "rulesHash": "rulebook-2.7:4956b884a538dd79"
+}

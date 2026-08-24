@@ -1,0 +1,289 @@
+<title>Shadow Logic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Lora:ital,wght@1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  /* Compromiso deliberado con un solo mundo visual: esto es la pantalla de un
+     juego noir, no un documento. Se pinta todo explícitamente para que no tome
+     prestado el fondo del anfitrión en ningún tema. */
+  :root {
+    --void:      #0b0e13;
+    --felt:      #141a22;
+    --felt-hi:   #1c242e;
+    --line:      #2a333f;
+    --brass:     #d9a441;
+    --brass-dim: #8a6a2c;
+    --shade:     #7c5cd6;
+    --paper:     #e8e3d6;
+    --paper-dim: #8a8577;
+    --found:     #4fb477;
+    --alarm:     #f85149;
+
+    --display: 'Oswald', 'Haettenschweiler', 'Arial Narrow', sans-serif;
+    --voice:   'Lora', Georgia, serif;
+    --data:    'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--void);
+    color: var(--paper);
+    font-family: var(--data);
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
+  }
+
+  .app {
+    max-width: 520px;
+    min-height: 100svh;
+    margin: 0 auto;
+    padding: 18px 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* ── letra de puerta de despacho ──────────────────────────────────────── */
+  .lettering {
+    font-family: var(--display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    line-height: 1.05;
+  }
+
+  .masthead { display: flex; flex-direction: column; gap: 6px; }
+  .masthead h1 { margin: 0; font-size: 30px; color: var(--brass); }
+  .masthead h1 span { color: var(--paper); }
+  .rule { height: 1px; background: linear-gradient(90deg, var(--brass), transparent 70%); }
+  .case-line {
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--paper-dim); display: flex; justify-content: space-between; gap: 12px;
+    align-items: baseline;
+  }
+  .case-line > :first-child {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .case-line > :last-child { white-space: nowrap; }
+
+  /* ── mapa de casos ────────────────────────────────────────────────────── */
+  #grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+  .card {
+    all: unset;
+    cursor: pointer;
+    background: var(--felt);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brass-dim);
+    border-radius: 3px;
+    padding: 12px 14px;
+    display: grid;
+    gap: 4px;
+    transition: background .16s, transform .16s, border-color .16s;
+  }
+  .card:hover:not(.locked) { background: var(--felt-hi); transform: translateY(-2px); }
+  .card:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+  .card.perfect { border-left-color: var(--brass); }
+  .card.locked { opacity: .34; cursor: default; border-left-color: var(--line); }
+
+  .card .num {
+    font-family: var(--display); font-size: 11px; letter-spacing: .2em;
+    color: var(--brass-dim);
+  }
+  .card .name {
+    font-family: var(--display); font-weight: 600; font-size: 17px;
+    letter-spacing: .06em; text-transform: uppercase; color: var(--paper);
+  }
+  .card .stars { color: var(--brass); letter-spacing: .1em; font-size: 13px; }
+  .card .par { font-size: 11px; color: var(--paper-dim); }
+
+  .primer {
+    background: var(--felt);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 14px 16px;
+    font-family: var(--voice);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--paper-dim);
+  }
+  .primer b { color: var(--paper); font-weight: 500; }
+
+  /* ── tablero ──────────────────────────────────────────────────────────── */
+  #board-wrap {
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 46svh;
+    display: grid;
+    place-items: center;
+    touch-action: none;
+    border-radius: 4px;
+    /* el charco de luz de la lámpara: atmósfera sin comerse la legibilidad */
+    background:
+      radial-gradient(120% 100% at 50% 42%, #18202a 0%, #0f141b 58%, #0b0e13 100%);
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  #board { display: block; }
+  #board-wrap.bump { animation: bump .18s ease; }
+  @keyframes bump {
+    0%, 100% { transform: translateX(0); }
+    35%      { transform: translateX(-3px); }
+    70%      { transform: translateX(3px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #board-wrap.bump { animation: none; }
+  }
+
+  /* ── instrumentos ─────────────────────────────────────────────────────── */
+  .gauges {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line); border-radius: 3px;
+    overflow: hidden;
+  }
+  .gauge { background: var(--felt); padding: 8px 10px; display: grid; gap: 2px; }
+  .gauge dt {
+    font-family: var(--display); font-size: 9px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--paper-dim);
+  }
+  .gauge dd {
+    margin: 0; font-size: 17px; font-variant-numeric: tabular-nums;
+    color: var(--paper);
+  }
+  .gauge dd.accent { color: var(--brass); }
+
+  /* ── la sombra habla ──────────────────────────────────────────────────── */
+  #hint-line {
+    min-height: 44px;
+    flex: 0 0 auto;
+    font-family: var(--voice);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--shade);
+    border-left: 2px solid var(--shade);
+    padding-left: 12px;
+  }
+  #hint-line:empty { border-left-color: transparent; }
+
+  /* ── botones ──────────────────────────────────────────────────────────── */
+  .actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  button.act {
+    all: unset;
+    cursor: pointer;
+    text-align: center;
+    padding: 11px 6px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--felt);
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--paper);
+    transition: background .14s, color .14s, border-color .14s;
+  }
+  button.act:hover:not([disabled]) { background: var(--felt-hi); border-color: var(--brass-dim); }
+  button.act:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+  button.act[disabled] { opacity: .32; cursor: default; }
+  button.act small { display: block; font-family: var(--data); font-size: 10px; color: var(--paper-dim); letter-spacing: 0; }
+  button.ghost { border-color: transparent; color: var(--paper-dim); }
+
+  /* ── overlay de victoria ──────────────────────────────────────────────── */
+  #overlay {
+    position: fixed; inset: 0; z-index: 10;
+    background: rgba(11, 14, 19, .93);
+    display: grid; place-items: center; padding: 24px;
+  }
+  #overlay[hidden] { display: none; }
+  .verdict {
+    width: min(420px, 100%);
+    background: var(--felt);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--brass);
+    border-radius: 3px;
+    padding: 26px 22px;
+    display: grid; gap: 12px; justify-items: center; text-align: center;
+  }
+  #win-stars { font-size: 30px; color: var(--brass); letter-spacing: .16em; }
+  #win-title { font-family: var(--display); font-weight: 600; font-size: 24px; letter-spacing: .16em; margin: 0; }
+  #win-detail { font-size: 12px; color: var(--paper-dim); }
+  .verdict .actions { width: 100%; grid-template-columns: repeat(3, 1fr); margin-top: 6px; }
+
+  [hidden] { display: none !important; }
+</style>
+
+<div class="app">
+
+  <!-- ══ MAPA DE CASOS ══════════════════════════════════════════════════ -->
+  <section id="screen-map">
+    <header class="masthead">
+      <h1 class="lettering">Shadow<span>Logic</span></h1>
+      <div class="rule"></div>
+      <div class="case-line">
+        <span>Caso 01 · ¿Quién se ha llevado el pastel?</span>
+        <span id="total">0 / 24</span>
+      </div>
+    </header>
+
+    <p class="primer" style="margin:14px 0">
+      No eliges dónde parar. Eliges <b>contra qué chocar</b>. Deslizas hasta topar,
+      recoges todas las pistas y te detienes sobre la salida. Tu sombra se despegó
+      hace tiempo y ya no vuelve: <b>empújala, úsala de pared, o piérdela en un
+      agujero</b> — pero solo una vez.
+    </p>
+
+    <div id="grid"></div>
+  </section>
+
+  <!-- ══ PARTIDA ════════════════════════════════════════════════════════ -->
+  <section id="screen-game" hidden style="display:flex;flex-direction:column;gap:14px;flex:1">
+    <header class="masthead">
+      <div class="case-line">
+        <button id="back" class="act ghost" style="padding:2px 0">← Casos</button>
+        <span id="case-place"></span>
+      </div>
+      <h1 id="case-title" class="lettering" style="font-size:22px;color:var(--paper)"></h1>
+      <div class="rule"></div>
+    </header>
+
+    <div id="board-wrap"><canvas id="board"></canvas></div>
+
+    <dl class="gauges">
+      <div class="gauge"><dt>Movs</dt><dd id="moves" class="accent">0</dd></div>
+      <div class="gauge"><dt>Óptimo</dt><dd id="par">—</dd></div>
+      <div class="gauge"><dt>Pistas</dt><dd id="clues">0/0</dd></div>
+      <div class="gauge"><dt>Tiempo</dt><dd id="time">00:00</dd></div>
+    </dl>
+
+    <p id="hint-line"></p>
+
+    <div class="actions">
+      <button id="undo" class="act">Deshacer</button>
+      <button id="restart" class="act">Reiniciar</button>
+      <button id="hint" class="act">Pista</button>
+      <button id="preview-btn" class="act">Aviso<small id="preview-mode">full</small></button>
+    </div>
+  </section>
+</div>
+
+<!-- ══ VEREDICTO ════════════════════════════════════════════════════════ -->
+<div id="overlay" hidden>
+  <div class="verdict">
+    <div id="win-stars">★★★</div>
+    <h2 id="win-title" class="lettering">Caso cerrado</h2>
+    <p id="win-detail"></p>
+    <div class="actions">
+      <button id="again" class="act">Repetir</button>
+      <button id="to-map" class="act">Casos</button>
+      <button id="next" class="act">Siguiente</button>
+    </div>
+  </div>
+</div>
+
+<script>/*__BUNDLE__*/</script>

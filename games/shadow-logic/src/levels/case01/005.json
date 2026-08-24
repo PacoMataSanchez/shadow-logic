@@ -1,0 +1,64 @@
+{
+  "id": "c1-005",
+  "case": 1,
+  "title": "La puerta",
+  "place": "Trastienda · la puerta que no cierra sola",
+  "grid": [
+    "#########",
+    "#......_#",
+    "#.#...#.#",
+    "#....#..#",
+    "####+####",
+    "#.*#...E#",
+    "#.....*.#",
+    "#########"
+  ],
+  "playerStart": [
+    2,
+    3
+  ],
+  "shadowStart": [
+    1,
+    6
+  ],
+  "doors": [
+    {
+      "id": "d1",
+      "pos": [
+        4,
+        4
+      ],
+      "controlledBy": [
+        "p1"
+      ],
+      "logic": "OR"
+    }
+  ],
+  "plates": [
+    {
+      "id": "p1",
+      "pos": [
+        1,
+        7
+      ]
+    }
+  ],
+  "hintText": "Yo peso, tú no. La placa es cosa mía. Déjame encima y no me toques más.",
+  "optimalMoves": 12,
+  "solutionPath": [
+    "U",
+    "R",
+    "L",
+    "D",
+    "R",
+    "D",
+    "L",
+    "U",
+    "R",
+    "D",
+    "R",
+    "U"
+  ],
+  "solutionCount": 1,
+  "rulesHash": "rulebook-2.7:4956b884a538dd79"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "c1-004",
+  "case": 1,
+  "title": "Colócame",
+  "place": "Portal · el felpudo que nadie sacude",
+  "grid": [
+    "########",
+    "#......#",
+    "#.#..#.#",
+    "#..*.E.#",
+    "#..#...#",
+    "#.#...##",
+    "#*..*..#",
+    "########"
+  ],
+  "playerStart": [
+    2,
+    1
+  ],
+  "shadowStart": [
+    4,
+    4
+  ],
+  "doors": [],
+  "plates": [],
+  "hintText": "Piensa dónde me quieres ANTES de empujarme. Luego no te quejes.",
+  "optimalMoves": 13,
+  "solutionPath": [
+    "D",
+    "R",
+    "L",
+    "U",
+    "R",
+    "D",
+    "L",
+    "U",
+    "L",
+    "R",
+    "D",
+    "L",
+    "U"
+  ],
+  "solutionCount": 1,
+  "rulesHash": "rulebook-2.7:4956b884a538dd79"
+}
